@@ -1,4 +1,4 @@
 let userhours = prompt('What time is it?');
-let seconds = Number(userhours) * 60;
+let seconds = Number(userhours) * 60 * 60;
 
 alert(`In your hours: ${seconds} seconds!`);
