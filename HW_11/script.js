@@ -1,18 +1,25 @@
 console.log('task 1')
-let myArr = ['Київ', 5, 'BMW', 'Іван', 38, 12]
+const myArr = new Array('Київ', 2, 'BMW', 18, 'Іван', 10);
 
-let sum = 0;
-let count = 0;
+const calculateAverage = function (arr) {
+    let sum = 0;
+    let count = 0;
+    let result;
 
-for (let i = 0; i < myArr.length; i++) {
-    if (typeof(myArr[i]) === 'number') {
-    sum += myArr[i];
-    count++;
+    for (let i = 0; i < arr.length; i++) {
+        if (typeof(myArr[i]) === 'number') {
+        sum += myArr[i];
+        count++;
+        }
+        result = `Cереднє арифметичне числових елементів даного масиву: ${sum / count}`;
+        if (typeof(myArr[i]) !== 'number') {
+            result = 'Масив не містить числових значень!';
+        }
     }
+    console.log(result);
 }
 
-let result = sum / count;
-console.log('Cереднє арифметичне числових елементів даного масиву:', result);
+calculateAverage(myArr);
 
 
 
@@ -47,22 +54,22 @@ function doMath(x, znak, y) {
                 break;
             default:
                 result = 'Некоректний знак операції';
-            }
+        }
     } else {
         result = 'ви ввели не число';
     }
 
     alert(`Результат: ${result}`);
-
 }
 
+doMath(x, znak, y);
 
 
 
 console.log('task 3')
 
-const mainLength = parseInt(prompt('Введіть довжину основного масиву:'));
-const innerLength = parseInt(prompt('Введіть довжину внутрішніх масивів:'));
+const mainLength = prompt('Введіть довжину основного масиву:');
+const innerLength = prompt('Введіть довжину внутрішніх масивів:');
 const value = prompt('Введіть значення елементів масиву:');
 
 
@@ -101,4 +108,5 @@ console.log('task 4')
 }
 
 removeChars ('hello world', ['l', 'd']);
+
 
