@@ -77,7 +77,3 @@ console.log(totalBalance);
 
 
 
-
-
-
-
