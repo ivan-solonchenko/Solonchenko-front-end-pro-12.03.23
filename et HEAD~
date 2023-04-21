@@ -1,0 +1,53 @@
+[33mcommit f6ca123ef01b757e145e1f13ae2707eed38a0789[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Solonchenko Ivan <vanek.solonchenko@gmail.com>
+Date:   Wed Apr 5 16:28:39 2023 +0300
+
+    added HW_12, HW_13, HW_14
+
+[33mcommit 5877931bf6432e471d2c6ab2d11ed76c9fd02c93[m
+Author: Solonchenko Ivan <vanek.solonchenko@gmail.com>
+Date:   Tue Apr 4 16:56:03 2023 +0300
+
+    fixed HW_11
+
+[33mcommit 5d84ea7f7adb0958eb057f93d9cc018c7a238523[m
+Author: Solonchenko Ivan <vanek.solonchenko@gmail.com>
+Date:   Mon Apr 3 09:40:42 2023 +0300
+
+    added HW_11
+
+[33mcommit ae03a51225e3eb80ab8308a96f8dc80e44c45e63[m
+Author: Solonchenko Ivan <vanek.solonchenko@gmail.com>
+Date:   Sat Mar 25 16:16:10 2023 +0200
+
+    added HW_9-10
+
+[33mcommit 699357db33ce1388f7f8697cbbc060f5b6cf1d86[m
+Author: Solonchenko Ivan <vanek.solonchenko@gmail.com>
+Date:   Thu Mar 23 10:48:40 2023 +0200
+
+    added HW_6-8
+
+[33mcommit 872cc7ee58b2751c4718a8317f5f8ce297ca53f2[m
+Author: Solonchenko Ivan <vanek.solonchenko@gmail.com>
+Date:   Wed Mar 22 12:16:36 2023 +0200
+
+    fixed HW_4
+
+[33mcommit 0c6cc3b9ef7163be6c980e4533b6b1a7f9ddea1a[m
+Author: Solonchenko Ivan <vanek.solonchenko@gmail.com>
+Date:   Tue Mar 21 18:40:33 2023 +0200
+
+    added HW_3, HW_4, HW_5
+
+[33mcommit be9388424018dc892f3f8c51db215280e2d32449[m
+Author: Solonchenko Ivan <vanek.solonchenko@gmail.com>
+Date:   Thu Mar 16 13:19:06 2023 +0200
+
+    added HW_1 and gitignore file
+
+[33mcommit 90e80816c90dc925327f1cc71d40a46e1122892f[m
+Author: Solonchenko Ivan <vanek.solonchenko@gmail.com>
+Date:   Sun Mar 12 18:58:38 2023 +0200
+
+    added README file
