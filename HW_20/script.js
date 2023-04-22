@@ -8,16 +8,12 @@
 
 // 2. Створити клас Квартира.
 class Apartment {
-    constructor() {
-        this.residents = [];
-    }
+    residents = [];
 
     addResident (resident) {
         this.residents.push(resident);
     }
 }
-
-
 //3. Створити клас Будинок.
 class House {
     constructor(maxApartments) {
@@ -26,10 +22,10 @@ class House {
     }
 
     addApartment (apartment) {
-        if (this.apartments.length <= this.maxApartments) {
-            this.apartments.push(apartment);
-        } else {
+        if (this.apartments.length >= this.maxApartments) {
             console.log('Вже досягнута максимальна кількість квартир!');
+        } else {
+            this.apartments.push(apartment);
         }
     }
 }
@@ -40,9 +36,9 @@ const person2 = new Person ('Вікторія', 'жінка ');
 const person3 = new Person ('Ксенія', 'жінка ');
 
 //Cтворити декілька екземплярів класу Квартира
-const apartment1 = new Apartment;
-const apartment2 = new Apartment;
-const apartment3 = new Apartment;
+const apartment1 = new Apartment();
+const apartment2 = new Apartment();
+const apartment3 = new Apartment();
 
 //Додадити екземпляри класу Людина до екземплярів класу Квартира
 apartment1.addResident(person1);
