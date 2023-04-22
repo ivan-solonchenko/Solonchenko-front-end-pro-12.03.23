@@ -18,35 +18,41 @@ class Car {
     }
 
     setOwner (owner) {
-        if (this.age >= 18) {
+        if (owner.age >= 18) {
             this.owner = owner;
-        } else {
-            console.log(`Власник має вік меньший за 18 років.`)
         }
     }
 
-    getInfo2() {
-        console.log(`Інформація про автомобіль: 
-        марка: ${this.brand}; 
-        модель: ${this.model}; 
-        рік виписку: ${this.yearOfMade}; 
+    getInfo() {
+        console.log(`---------------------------------------\nІнформація про автомобіль:
+        марка: ${this.brand};
+        модель: ${this.model};
+        рік виписку: ${this.yearOfMade};
         номерний знак: ${this.licensePlate}.`);
-        console.log('Власник:');
-        this.owner.getInfo();
+        if (this.owner !== undefined) {
+            console.log('Власник:');
+            this.owner.getInfo()
+        } else {
+            console.log(`Власник має вік меньший за 18 років.`)
+        }
     }
 }
 
 // Створення декількох екземплярів класу "Людина"
 const person1 = new Person("Олександр", 23);
+const person2 = new Person("Вікторія", 38);
+const person3 = new Person("Марія", 17);
 
 // Створення декількох екземплярів класу "Автомобіль"
 const car1 = new Car("Toyota", "Corolla", 2015, "BC1234AA");
+const car2 = new Car("Ford", "Mustang", 2021, "BC5678BB");
+const car3 = new Car("Audi", "A6", 2023, "BE1111AA");
 
-// Вивід інформації про автомобілі
-car1.getInfo2();
-
-const owner1 = new Car("Toyota", "Corolla", 2015, "BC1234AA");
-person1.setOwner();
-
-
+// Присвоїти власників автомобілям.
+car1.setOwner(person1);
+car2.setOwner(person2);
+car3.setOwner(person3);
+car1.getInfo();
+car2.getInfo();
+car3.getInfo();
 
