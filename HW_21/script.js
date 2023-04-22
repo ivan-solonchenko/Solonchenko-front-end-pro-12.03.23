@@ -55,4 +55,3 @@ car3.setOwner(person3);
 car1.getInfo();
 car2.getInfo();
 car3.getInfo();
-
