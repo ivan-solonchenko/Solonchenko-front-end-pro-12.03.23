@@ -1,7 +1,7 @@
 class Student {
-    constructor(name, surname, wasBorn, grades) {
-        this.name = name;
-        this.surname = surname;
+    constructor(firstName, lastName, wasBorn, grades) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.wasBorn = wasBorn;
         this.grades = grades;
     }
