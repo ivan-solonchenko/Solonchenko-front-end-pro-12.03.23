@@ -6,7 +6,7 @@ class Student {
         this.grades = grades;
     }
 
-    attendance = new Array(25);
+    attendance = new Array(25).fill(null);
 
     getAgeOfStudent() {
         const currentYear = new Date().getFullYear();
@@ -19,24 +19,16 @@ class Student {
     }
 
     present() {
-        if (this.attendance.filter(Boolean).length >= 25) {
-            console.log("Масив відвідуваності заповнений");
-        }
-
-        const index = this.attendance.indexOf(undefined);
+        const index = this.attendance.indexOf(null);
         if (index >= 0) {
-            this.attendance[index] = true;
+            return this.attendance[index] = true;
         }
     }
 
     absent() {
-        if (this.attendance.filter(Boolean).length >= 25) {
-            console.log("Масив відвідуваності заповнений");
-        }
-
-        const index = this.attendance.indexOf(undefined);
+        const index = this.attendance.indexOf(null);
         if (index >= 0) {
-            this.attendance[index] = false;
+            return this.attendance[index] = false;
         }
     }
 
@@ -54,11 +46,11 @@ class Student {
     }
 }
 
-
 const student1 = new Student('Ivan', 'Solonchenko', 1997, [90, 95, 85, 100, 98]);
 
 student1.getAgeOfStudent();
 student1.getAverageScore();
+
 student1.present();
 student1.present();
 student1.present();
@@ -84,5 +76,26 @@ student1.present();
 student1.present();
 student1.present();
 student1.present();
-console.log(student1.attendance);
+
+student1.summary();
+
+
+console.log('---------------------------')
+const student2 = new Student('Viktoria', 'Kravchenko', 1998, [60, 95, 50, 100, 75]);
+
+student2.getAgeOfStudent();
+student2.getAverageScore();
+
+student2.present();
+student2.present();
+student2.present();
+student2.absent()
+student2.absent()
+student2.absent()
+student2.present();
+student2.present();
+student2.present();
+student2.absent()
+student2.absent();
+
 student1.summary();
