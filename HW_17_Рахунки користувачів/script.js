@@ -67,13 +67,3 @@ let totalBalance = filtredUsers.reduce((acc, user) =>
 
 console.log(phoneNumbers);
 console.log(totalBalance);
-
-
-
-
-
-
-
-
-
-

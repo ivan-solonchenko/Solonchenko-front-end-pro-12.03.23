@@ -108,5 +108,3 @@ console.log('task 4')
 }
 
 removeChars ('hello world', ['l', 'd']);
-
-

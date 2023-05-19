@@ -13,6 +13,3 @@ const degree = prompt('Введіть ступінь.');
 
 const result = pow(num, degree);
 (isNaN(num) || isNaN(degree)) ? alert('Ви ввели не число!') : alert(`Результат: ${result}`);
-
-
-

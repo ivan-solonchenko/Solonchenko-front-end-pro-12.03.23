@@ -1,0 +1,25 @@
+{
+  "name": "solonchenko-front-end-pro-12.03.23",
+  "version": "1.0.0",
+  "description": "My repository on the Front End Pro course at Hillel IT School",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivan-solonchenko/Solonchenko-front-end-pro-12.03.23.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ivan-solonchenko/Solonchenko-front-end-pro-12.03.23/issues"
+  },
+  "homepage": "https://github.com/ivan-solonchenko/Solonchenko-front-end-pro-12.03.23#readme",
+  "devDependencies": {
+    "jest": "^29.5.0"
+  }
+}
