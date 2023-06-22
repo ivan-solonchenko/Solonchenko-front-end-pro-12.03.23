@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HW_35</title>
+    <style>
+        .image-container {
+            position: relative;
+            margin: 0 auto;
+            width: 200px;
+            height: 350px;
+        }
+
+        #prev-button {
+            position: fixed;
+            top: 27%;
+            left: 30%;
+            transform: translateY(-50%);
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        #next-button {
+            position: fixed;
+            top: 27%;
+            right: 30%;
+            transform: translateY(-50%);
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+<div id="slider">
+    <div class="image-container">
+        <img id="slider-image" src="" alt="Slider Image">
+    </div>
+
+    <button type="button" id="prev-button">Prev</button>
+    <button type="button" id="next-button">Next</button>
+</div>
+
+<script src="./script.js"></script>
+</body>
+</html>
