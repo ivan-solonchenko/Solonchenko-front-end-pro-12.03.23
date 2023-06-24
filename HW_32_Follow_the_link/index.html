@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HW_32</title>
+    <script>
+        function checkProtocol(url) {
+            if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                alert("Посилання не має протоколу (http:// або https://)");
+            } else {
+                alert("Посилання має протокол");
+            }
+        }
+
+        function redirectToWebsite(url) {
+            if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                url = "http://" + url;
+            }
+
+            window.location.href = url;
+        }
+    </script>
+</head>
+<body>
+<h1>Переадресація на інший сайт</h1>
+
+<label for="urlInput">URL:</label>
+<input type="text" id="urlInput">
+
+<button onclick="checkProtocol(document.getElementById('urlInput').value)">Перевірка на протокол</button>
+<button onclick="redirectToWebsite(document.getElementById('urlInput').value)">Перейти</button>
+</body>
+</html>
