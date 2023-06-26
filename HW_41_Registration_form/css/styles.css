@@ -1,0 +1,54 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.form, .data-сontainer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 375px;
+    margin: 20px auto;
+    border: 1px solid rgb(120, 118, 118);
+    border-radius: 5px;
+    padding: 30px;
+    background: #eae4e4;
+}
+
+.data-сontainer {
+    display: none;
+}
+
+table {
+    margin: 0 auto;
+}
+
+.title-text {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.display-block {
+    display: block;
+}
+
+th {
+    text-align: right;
+    width: 50%;
+}
+
+tr:nth-child(odd) {
+    background-color: #cec3c3;
+}
+
+button {
+    cursor: pointer;
+    background-color: #cec3c3;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #aba4a4;
+}

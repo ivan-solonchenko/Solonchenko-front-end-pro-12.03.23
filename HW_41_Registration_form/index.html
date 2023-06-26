@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HW_41</title>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+<div class="main-content">
+    <form class="form" id="registrationForm">
+        <h1 class="display-block title-text">Форма для регистрації</h1>
+
+        <div>
+            <label for="firstName">Ім'я:</label>
+            <input type="text" id="firstName" name="firstName" required>
+        </div>
+
+        <div>
+            <label for="lastName">Прізвище:</label>
+            <input type="text" id="lastName" name="lastName" required>
+        </div>
+
+        <div>
+            <label for="birthdate">Дата народження:</label>
+            <input type="date" id="birthdate" name="birthdate" required>
+        </div>
+
+        <div>
+            <span>Стать:</span>
+            <input type="radio" id="male" name="gender" value="чоловік" required>
+            <label for="male">чоловік</label>
+            <input type="radio" id="female" name="gender" value="жінка" required>
+            <label for="female">жінка</label>
+        </div>
+
+        <div>
+            <label for="city">Місто:</label>
+            <select id="city" name="city" required>
+                <option value="" selected>Оберіть місто</option>
+                <option value="Київ">Київ</option>
+                <option value="Львів">Львів</option>
+                <option value="Одеса">Одеса</option>
+                <option value="Інше">Інше</option>
+            </select>
+        </div>
+
+        <div>
+            <label class="display-block" for="address">Адреса:</label>
+            <textarea id="address" name="address" rows="4" cols="50" required></textarea>
+        </div>
+
+        <div>
+            <span class="display-block">Якими мовами ви володієте?</span><br>
+            <label for="english">Українська</label>
+            <input type="checkbox" id="ukrainian" name="languages" value="українська"><br>
+            <label for="english">Англійська</label>
+            <input type="checkbox" id="english" name="languages" value="англійська"><br>
+            <label for="french">Французька</label>
+            <input type="checkbox" id="french" name="languages" value="французька"><br>
+            <label for="spanish">Іспанська</label>
+            <input type="checkbox" id="spanish" name="languages" value="іспанська"><br>
+        </div>
+
+        <button type="button" onclick="displayData()">Зберегти</button>
+    </form>
+
+    <div class="data-сontainer" id="tableContainer"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
