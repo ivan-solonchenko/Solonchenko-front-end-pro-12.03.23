@@ -16,23 +16,28 @@ const prices = {
     'Сік': 7
 };
 
-const leftSidebarContent = document.getElementById('left-sidebar-content');
+const leftSidebar = document.getElementById('left-sidebar');
+const categoriesSection = document.getElementById('categories-section');
 const categoryList = document.getElementsByClassName('category');
 const productList = document.getElementById('product-list');
-const productDetails = document.getElementById('productDetails');
+const productDetails = document.getElementById('product-details');
 const buyButton = document.getElementById('buy-button');
-const orderForm = document.getElementById('orderForm');
+const productsSection = document.getElementById('products-section');
+const productInfo = document.getElementById('product-info');
+const orderForm = document.getElementById('order-form');
 const ordersButton = document.getElementById('ordersButton');
+const shoppingCart = document.getElementById('user-shopping-cart');
 let selectedProduct;
 
 function showProducts(category) {
-    productList.innerHTML = '';
     const products = data[category];
+    productList.innerHTML = '';
 
     products.forEach((product, index) => {
         const listItem = document.createElement('li');
+        listItem.id = 'product-list-item';
         listItem.innerText = product;
-        listItem.setAttribute('data-index', index);
+        listItem.setAttribute('product-item-index', index);
         productList.appendChild(listItem);
     });
 }
@@ -41,9 +46,8 @@ Array.from(categoryList).forEach((element) => {
     element.addEventListener('click', (event) => {
         const category = event.target.textContent;
         showProducts(category);
-        productInfo.style.display = 'block';
-        products.style.display = 'block';
-        orderForm.style.display = 'none';
+        productsSection.style.display = 'block';
+        productInfo.style.display = 'none';
         orderForm.reset();
     });
 });
@@ -52,62 +56,64 @@ productList.addEventListener('click', (event) => {
     const product = event.target.textContent;
     productDetails.textContent = 'Ви обрали: ' + product.toLowerCase();
     orderForm.style.display = 'none';
+    productInfo.style.display = 'block';
     orderForm.reset();
     selectedProduct = product;
 });
 
 buyButton.addEventListener('click', () => {
-    document.getElementById('orderForm').style.display = "block";
+    orderForm.style.display = 'block';
 });
 
-orderForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const fullName = document.getElementById('fullName').value;
+function fillingForm() {
+    const fullName = document.getElementById('full-name').value;
     const city = document.getElementById('city').value;
-    const deliveryBranch = document.getElementById('deliveryBranch').value;
-    const cashOnDelivery = document.getElementById('cashOnDelivery');
-    const cardPayment = document.getElementById('cardPayment');
+    const deliveryBranch = document.getElementById('delivery-branch').value;
+    const cashOnDelivery = document.getElementById('cash-on-delivery');
+    const cardPayment = document.getElementById('card-payment');
     const quantity = document.getElementById('quantity').value;
     const comment = document.getElementById('comment').value;
+    const price = prices[selectedProduct] * quantity;
     let selectedPaymentMethod;
 
-    function fillingForm() {
-        const price = prices[selectedProduct] * quantity;
-
-        if (cashOnDelivery.checked) {
-            selectedPaymentMethod = cashOnDelivery.value;
-        }
-
-        if (cardPayment.checked) {
-            selectedPaymentMethod = cardPayment.value;
-        }
-
-        const order = {
-            product: selectedProduct.toLowerCase(),
-            price: price,
-            orderTime: new Date().toLocaleString('uk-UA', { timeZone: 'Europe/Kiev' }),
-            city: city,
-            deliveryBranch: deliveryBranch,
-            cardPayment: selectedPaymentMethod,
-            quantity: quantity,
-            comment: comment,
-            fullName: fullName,
-        };
-
-        return order;
+    if (cashOnDelivery.checked) {
+        selectedPaymentMethod = cashOnDelivery.value;
     }
+
+    if (cardPayment.checked) {
+        selectedPaymentMethod = cardPayment.value;
+    }
+
+    const order = {
+        product: selectedProduct.toLowerCase(),
+        price: price,
+        orderTime: new Date().toLocaleString('uk-UA', { timeZone: 'Europe/Kiev' }),
+        city: city,
+        deliveryBranch: deliveryBranch,
+        cardPayment: selectedPaymentMethod,
+        quantity: quantity,
+        comment: comment,
+        fullName: fullName,
+    };
+
+    return order;
+}
+
+orderForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    fillingForm();
 
     if (orderForm.checkValidity()) {
         const order = fillingForm();
         saveOrder(order);
-        console.log(order);
 
-        alert(`Ви купили ${selectedProduct.toLowerCase()}: ${quantity} шт.\nВідділення Нової пошти для надсилання: ${deliveryBranch}.\nДякуємо за покупку!`);
+        alert(`Ви купили ${order.product}: ${order.quantity} шт.\nМісто: ${order.city}.\nВідділення Нової пошти для надсилання: ${order.deliveryBranch}.
+        \nДякуємо за покупку!`);
 
         orderForm.reset();
         productDetails.innerText = '';
         productInfo.style.display = 'none';
-        products.style.display = 'none';
+        productsSection.style.display = 'none';
         orderForm.style.display = 'none';
     }
 });
@@ -122,93 +128,134 @@ function getOrders() {
     return JSON.parse(localStorage.getItem('orders')) || [];
 }
 
-function deleteOrder(index) {
-    const orders = getOrders();
-    orders.splice(index, 1);
-    localStorage.setItem('orders', JSON.stringify(orders));
-}
-
-function displayOrderDetails(orderIndex) {
-    const orders = getOrders();
-    const order = orders[orderIndex];
-    const ordersData = document.getElementById('ordersData');
-    const orderData = ordersData.children[orderIndex];
-    const deleteOrderData = '<button id="delete-order-data-button">Видалити замовлення</button>'
-
-    const orderDetailsHTML = `
-<div id="orderDetails">
-    <p>Товар: ${order.product}</p>
-    <p>Кількість: ${order.quantity} шт.</p>
-    <p>Ім'я клієнта: ${order.fullName}</p>
-    <p>Місто: ${order.city}</p>
-    <p>Відділення Нової пошти: ${order.deliveryBranch}</p>
-    <p>Метод оплати: ${(order.cardPayment).toLowerCase()}</p>
-</div>
-`;
-
-    orderData.innerHTML += orderDetailsHTML;
-
-    if (order.comment) {
-        const orderDetails = document.getElementById('orderDetails');
-        orderDetailsComment = `<p>Коментар: ${order.comment}</p>`;
-
-        orderDetails.innerHTML += orderDetailsComment;
-    }
-
-    orderData.innerHTML += deleteOrderData;
-
-//Видалення одного
-    const delOrderDataButton = document.getElementById('delete-order-data-button');
-
-    delOrderDataButton.addEventListener('click', () => {
-        orderData.remove();
-        deleteOrder(orderIndex);
-    })
-}
-
 ordersButton.addEventListener('click', () => {
-    const ordersData = document.getElementById('ordersData');
-    const storedObjects = getOrders();
-    leftSidebarContent.style.display = "none";
+    const shoppingCartTitle = document.createElement('h2');
+    const ordersData = document.createElement('ol');
+    shoppingCartTitle.id = 'shopping-cart-title';
+    shoppingCartTitle.textContent = 'Корзина:';
+    ordersData.id = 'orders-data';
+    ordersData.innerHTML += '<p id="empty-cart">У вас ще немає замовлень!</p>';
+    shoppingCart.appendChild(shoppingCartTitle);
+    shoppingCart.appendChild(ordersData);
+    categoriesSection.remove();
+    shoppingCart.style.display = 'block';
+    productInfo.style.display = 'none';///////////////////////////////////////////////////////////////remove();
+    productsSection.style.display = 'none';///////////////////////////////////////////////////////////////remove();
+    productDetails.remove();
 
-    function showUserOrders() {
-        storedObjects.forEach((storedObject, index) => {
+    showUserOrders();
+    deleteOrder();
+    refreshPage();
+    clearAllOrders();
+});
+
+function deleteOrder() {
+    const ordersData = document.getElementById('orders-data');
+    ordersData.addEventListener('click', (event) => {
+        if (event.target.id === 'delete-order-data-button') {
+            const orderItem = event.target.parentNode;
+            const orderIndex = Array.from(ordersData.children).indexOf(orderItem);
+            const orders = getOrders();
+            orders.splice(orderIndex, 1);
+            localStorage.setItem('orders', JSON.stringify(orders));
+            orderItem.remove();
+            showUserOrders();
+        }
+    });
+}
+
+function showUserOrders() {
+    const storedObjects = getOrders();
+    const ordersData = document.getElementById('orders-data');
+
+    if (storedObjects && storedObjects.length > 0 && ordersData) {
+        ordersData.innerHTML = '';
+
+        storedObjects.forEach((storedObject) => {
             const orderItem = document.createElement('li');
+            const deleteOrderDataButton = document.createElement('button');
+
             orderItem.id = 'order-item';
-            orderItem.innerHTML = `<p><strong>Дата:</strong> ${storedObject.orderTime}. <strong>Ціна:</strong> ${storedObject.price}грн</p>`;
+            orderItem.innerHTML = `<p id="short-order-information"><strong>Дата:</strong> ${storedObject.orderTime}. <strong>Ціна:</strong> ${storedObject.price}грн</p>`;
+
+            deleteOrderDataButton.id = 'delete-order-data-button';
+            deleteOrderDataButton.textContent = 'Видалити замовлення';
+            orderItem.appendChild(deleteOrderDataButton);
+
             ordersData.appendChild(orderItem);
         });
+
+
+        selectOrderElements();
     }
-
-    if (storedObjects && storedObjects.length > 0) {
-        ordersData.innerHTML = '';
-        showUserOrders()
-    } else {
-        ordersData.innerHTML = 'У вас ще немає замовлень!';
+    else {
+        ordersData.innerHTML = '<p id="empty-cart">У вас ще немає замовлень!</p>';
+        document.getElementById('del-orders-list-button').remove();
     }
+}
 
-//Видалення всього
-    const delOrdersDataButton = document.createElement('button');
-    delOrdersDataButton.id = 'delOrdersData';
-    delOrdersDataButton.textContent  = 'Видалити історію замовлень';
-    ordersData.appendChild(delOrdersDataButton);
+function refreshPage() {
+    const updatePageButton = document.createElement('button');
+    updatePageButton.textContent = 'Повернтись на головну'
+    shoppingCart.appendChild(updatePageButton);
 
-    delOrdersDataButton.addEventListener('click', () => {
-        localStorage.clear();
+    updatePageButton.addEventListener('click', () => {
+        window.location.reload();
     })
+}
 
-
-    const orderElements = document.querySelectorAll('#order-item');
+function selectOrderElements() {
+    const ordersData = document.getElementById('orders-data');
+    const orderElements = document.querySelectorAll('#order-item #short-order-information');
     orderElements.forEach((orderElement, index) => {
         orderElement.addEventListener('click', () => {
-
-            const ordersData = document.getElementById('ordersData');
+            const storedObjects = getOrders();
+            const order = storedObjects[index];
             const orderData = ordersData.children[index];
-            const orderDetails = orderData.querySelector('#orderDetails');
+            let orderDetails = orderData.querySelector('#orderDetails');
 
-            if (!orderDetails) {
-                displayOrderDetails(index);
+            if (orderDetails) {
+                orderDetails.remove();
+            } else {
+                orderDetails = document.createElement('div');
+                orderDetails.id = 'orderDetails';
+                orderDetails.innerHTML = `
+                  <p>Товар: ${order.product}</p>
+                  <p>Кількість: ${order.quantity} шт.</p>
+                  <p>Ім'я клієнта: ${order.fullName}</p>
+                  <p>Місто: ${order.city}</p>
+                  <p>Відділення Нової пошти: ${order.deliveryBranch}</p>
+                  <p>Метод оплати: ${(order.cardPayment).toLowerCase()}</p>
+                `;
+
+                if (order.comment) {
+                    const orderDetailsComment = `<p>Коментар: ${order.comment}</p>`;
+                    orderDetails.innerHTML += orderDetailsComment;
+                }
+
+                orderData.appendChild(orderDetails);
             }
         });
     });
-});
+}
+
+
+showUserOrders();
+
+function clearAllOrders() {
+    const storedObjects = getOrders();
+
+    if (storedObjects && storedObjects.length > 0) {
+        const delOrdersListButton = document.createElement('button');
+        delOrdersListButton.id = 'del-orders-list-button';
+        delOrdersListButton.textContent  = 'Видалити історію замовлень';
+        shoppingCart.appendChild(delOrdersListButton);
+
+        delOrdersListButton.addEventListener('click', () => {
+            localStorage.clear();
+            delOrdersListButton.remove();
+            // ordersData.remove();
+            showUserOrders();
+        })
+    }
+}

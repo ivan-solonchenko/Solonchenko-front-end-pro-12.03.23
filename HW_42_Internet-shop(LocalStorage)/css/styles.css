@@ -40,31 +40,36 @@ body {
     text-align: center;
 }
 
-ul {
+.shopping-cart-title {
+    display: none;
+}
+
+ol, ul {
     margin: 0;
     padding: 0;
 }
 
-li, button {
+li {
     cursor: pointer;
     list-style: none;
-    margin-top: 10px;
+    padding: 5px 0;
 }
 
-.orders-data li {
-    list-style: decimal;
+button {
+    cursor: pointer;
+    margin-top: 10px;
 }
 
 h2 {
     text-align: center;
 }
 
-#products,
-#productInfo {
+#products-section,
+#product-info {
     display: none;
 }
 
-#orderForm {
+.order-form {
     display: none;
     margin: 20px 0 0;
 }
