@@ -25,8 +25,8 @@ const buyButton = document.getElementById('buy-button');
 const productsSection = document.getElementById('products-section');
 const productInfo = document.getElementById('product-info');
 const orderForm = document.getElementById('order-form');
-const ordersButton = document.getElementById('ordersButton');
-const shoppingCart = document.getElementById('user-shopping-cart');
+const ordersButton = document.getElementById('orders-button');
+const shoppingCart = document.getElementById('shopping-cart-section');
 let selectedProduct;
 
 function showProducts(category) {
@@ -101,7 +101,6 @@ function fillingForm() {
 
 orderForm.addEventListener('submit', (event) => {
     event.preventDefault();
-    fillingForm();
 
     if (orderForm.checkValidity()) {
         const order = fillingForm();
@@ -129,25 +128,69 @@ function getOrders() {
 }
 
 ordersButton.addEventListener('click', () => {
-    const shoppingCartTitle = document.createElement('h2');
-    const ordersData = document.createElement('ol');
-    shoppingCartTitle.id = 'shopping-cart-title';
-    shoppingCartTitle.textContent = 'Корзина:';
-    ordersData.id = 'orders-data';
-    ordersData.innerHTML += '<p id="empty-cart">У вас ще немає замовлень!</p>';
-    shoppingCart.appendChild(shoppingCartTitle);
-    shoppingCart.appendChild(ordersData);
-    categoriesSection.remove();
+    categoriesSection.style.display = 'none';
     shoppingCart.style.display = 'block';
-    productInfo.style.display = 'none';///////////////////////////////////////////////////////////////remove();
-    productsSection.style.display = 'none';///////////////////////////////////////////////////////////////remove();
-    productDetails.remove();
+    productInfo.style.display = 'none';
+    productsSection.style.display = 'none';
+    productDetails.style.display = 'none';
 
     showUserOrders();
-    deleteOrder();
-    refreshPage();
-    clearAllOrders();
 });
+
+function showUserOrders() {
+    shoppingCart.innerHTML = '';
+    const storedObjects = getOrders();
+    const shoppingCartTitle = document.createElement('h2');
+    const updatePageButton = document.createElement('button');
+    shoppingCartTitle.id = 'shopping-cart-title';
+    shoppingCartTitle.textContent = 'Корзина:';
+    updatePageButton.textContent = 'Повернтись на головну';
+    shoppingCart.appendChild(shoppingCartTitle);
+
+    if (storedObjects && storedObjects.length > 0) {
+        const ordersData = document.createElement('ol');
+        const delOrdersListButton = document.createElement('button')
+
+        ordersData.id = 'orders-data';
+        delOrdersListButton.textContent  = 'Видалити історію замовлень';
+        delOrdersListButton.id = 'del-orders-list-button';
+        shoppingCart.appendChild(ordersData);
+        shoppingCart.appendChild(delOrdersListButton);
+
+        storedObjects.forEach((storedObject) => {
+            const orderItem = document.createElement('li');
+            const deleteOrderDataButton = document.createElement('button');
+
+            orderItem.id = 'order-item';
+            orderItem.innerHTML = `<p><strong>Дата:</strong> ${storedObject.orderTime}. <strong>Ціна:</strong> ${storedObject.price}грн</p>`;
+            deleteOrderDataButton.id = 'delete-order-data-button';
+            deleteOrderDataButton.textContent = 'Видалити замовлення';
+            orderItem.appendChild(deleteOrderDataButton);
+            ordersData.appendChild(orderItem);
+
+            deleteOrderDataButton.addEventListener('click', () => {
+                deleteOrder();
+            })
+        });
+
+        delOrdersListButton.addEventListener('click', () => {
+            clearAllOrders();
+        })
+
+        selectOrderElements();
+    } else {
+        const emptyCart = document.createElement('p');
+        emptyCart.textContent = 'У вас ще немає замовлень!';
+
+        shoppingCart.appendChild(emptyCart);
+    }
+
+    shoppingCart.appendChild(updatePageButton);
+
+    updatePageButton.addEventListener('click', () => {
+        refreshPage();
+    })
+}
 
 function deleteOrder() {
     const ordersData = document.getElementById('orders-data');
@@ -164,49 +207,13 @@ function deleteOrder() {
     });
 }
 
-function showUserOrders() {
-    const storedObjects = getOrders();
-    const ordersData = document.getElementById('orders-data');
-
-    if (storedObjects && storedObjects.length > 0 && ordersData) {
-        ordersData.innerHTML = '';
-
-        storedObjects.forEach((storedObject) => {
-            const orderItem = document.createElement('li');
-            const deleteOrderDataButton = document.createElement('button');
-
-            orderItem.id = 'order-item';
-            orderItem.innerHTML = `<p id="short-order-information"><strong>Дата:</strong> ${storedObject.orderTime}. <strong>Ціна:</strong> ${storedObject.price}грн</p>`;
-
-            deleteOrderDataButton.id = 'delete-order-data-button';
-            deleteOrderDataButton.textContent = 'Видалити замовлення';
-            orderItem.appendChild(deleteOrderDataButton);
-
-            ordersData.appendChild(orderItem);
-        });
-
-
-        selectOrderElements();
-    }
-    else {
-        ordersData.innerHTML = '<p id="empty-cart">У вас ще немає замовлень!</p>';
-        document.getElementById('del-orders-list-button').remove();
-    }
-}
-
 function refreshPage() {
-    const updatePageButton = document.createElement('button');
-    updatePageButton.textContent = 'Повернтись на головну'
-    shoppingCart.appendChild(updatePageButton);
-
-    updatePageButton.addEventListener('click', () => {
-        window.location.reload();
-    })
+    window.location.reload();
 }
 
 function selectOrderElements() {
     const ordersData = document.getElementById('orders-data');
-    const orderElements = document.querySelectorAll('#order-item #short-order-information');
+    const orderElements = document.querySelectorAll('#order-item');
     orderElements.forEach((orderElement, index) => {
         orderElement.addEventListener('click', () => {
             const storedObjects = getOrders();
@@ -239,23 +246,9 @@ function selectOrderElements() {
     });
 }
 
-
 showUserOrders();
 
 function clearAllOrders() {
-    const storedObjects = getOrders();
-
-    if (storedObjects && storedObjects.length > 0) {
-        const delOrdersListButton = document.createElement('button');
-        delOrdersListButton.id = 'del-orders-list-button';
-        delOrdersListButton.textContent  = 'Видалити історію замовлень';
-        shoppingCart.appendChild(delOrdersListButton);
-
-        delOrdersListButton.addEventListener('click', () => {
-            localStorage.clear();
-            delOrdersListButton.remove();
-            // ordersData.remove();
-            showUserOrders();
-        })
-    }
+    localStorage.clear();
+    showUserOrders();
 }
