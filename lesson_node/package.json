@@ -1,0 +1,12 @@
+{
+  "name": "lesson_node",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "srart",
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
