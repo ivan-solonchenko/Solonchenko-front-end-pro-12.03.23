@@ -1,0 +1,9 @@
+[
+  {
+    "message": "My message"
+  },
+  {
+    "message": "My message",
+    "owner": "Ivan"
+  }
+]
