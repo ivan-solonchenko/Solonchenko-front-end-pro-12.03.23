@@ -5,5 +5,9 @@
   {
     "message": "My message",
     "owner": "Ivan"
+  },
+  {
+    "name": "New data",
+    "value": 0.9598225862789641
   }
 ]
