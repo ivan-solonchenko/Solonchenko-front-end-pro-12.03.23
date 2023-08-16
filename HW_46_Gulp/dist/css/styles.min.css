@@ -1,0 +1,21 @@
+body {
+  width: 800px;
+  margin: 0, auto;
+  background-color: #aba4a4;
+}
+.header {
+  height: 50px;
+  background: #fff6f6;
+}
+.header .header-title {
+  font-size: 25px;
+  color: #ff6347;
+}
+.main-content .main-content-title {
+  font-size: 20px;
+  color: #091d6b;
+}
+.main-content .main-content-text {
+  font-size: 15px;
+  color: #be6e5f;
+}

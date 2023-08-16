@@ -1,0 +1,27 @@
+{
+  "name": "hw_46_gulp11111111111",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gulp-built": "gulp bundle",
+    "gulp-lint": "gulp lint",
+    "gulp-sass": "gulp sass"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-eslint": "^6.0.0",
+    "gulp-less": "^5.0.0",
+    "gulp-sass": "^5.1.0",
+    "gulp-uglify": "^3.0.2",
+    "node-sass": "^9.0.0"
+  },
+  "dependencies": {
+    "sass": "^1.65.1"
+  }
+}
